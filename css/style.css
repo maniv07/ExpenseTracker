@@ -1,0 +1,46 @@
+body {
+    background-color: #f1f5f9;
+}
+
+.box {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.income {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.expense {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-group-item.income {
+    border-left: 5px solid #16a34a;
+}
+
+.list-group-item.expense {
+    border-left: 5px solid #dc2626;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+.delete-btn:hover {
+    color: darkred;
+}
+#expenseChart {
+    max-height: 300px;
+}

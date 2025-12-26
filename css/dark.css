@@ -1,0 +1,47 @@
+/* ===== DARK MODE ROOT ===== */
+body.dark {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+body.dark .navbar {
+    background-color: #000000 !important;
+}
+
+/* CONTAINER */
+body.dark .container {
+    background-color: transparent !important;
+}
+
+/* CARD */
+body.dark .card {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: none;
+}
+
+/* INPUTS */
+body.dark input,
+body.dark select,
+body.dark textarea {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border: 1px solid #555 !important;
+}
+
+/* PLACEHOLDER */
+body.dark ::placeholder {
+    color: #bbbbbb !important;
+}
+
+/* BUTTONS */
+body.dark .btn {
+    color: #ffffff !important;
+}
+
+/* LINKS */
+body.dark a {
+    color: #4da3ff !important;
+}

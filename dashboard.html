@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Tracker Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Dark mode -->
+    <link rel="stylesheet" href="css/dark.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-dark px-3">
+    <span class="navbar-brand">Expense Tracker</span>
+
+    <div class="d-flex align-items-center">
+        <div class="form-check form-switch text-light me-3">
+            <input class="form-check-input" type="checkbox" id="themeToggle">
+            <label class="form-check-label">Dark Mode</label>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<h4 class="text-center mt-5" id="loadingText">Loading Dashboard...</h4>
+
+<div class="container mt-4" id="dashboardContent" style="display:none;">
+
+    <!-- USER INFO -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h4>Welcome, <span id="userName"></span></h4>
+            <p>Email: <span id="userEmail"></span></p>
+        </div>
+    </div>
+
+    <!-- ADD BANK -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5>Add Bank</h5>
+            <input id="bankName" class="form-control mb-2" placeholder="Bank Name">
+            <select id="accountType" class="form-control mb-2">
+                <option>Savings</option>
+                <option>Current</option>
+            </select>
+            <input id="balance" type="number" class="form-control mb-2" placeholder="Opening Balance">
+            <button class="btn btn-success w-100" onclick="addBank()">Add Bank</button>
+        </div>
+    </div>
+
+    <!-- BANK LIST -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5>Your Bank Accounts  </h5>
+            
+            <ul id="bankList" class="list-group"></ul>
+        </div>
+    </div>
+
+    <!-- ADD EXPENSE -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5>Add Expense</h5>
+
+            <input id="expenseAmount" type="number" class="form-control mb-2" placeholder="Amount">
+
+            <select id="expenseCategory" class="form-control mb-2">
+                <option>Food</option>
+                <option>Grocery</option>
+                <option>Transport</option>
+                <option>Shopping</option>
+                <option>Education</option>
+                <option>Health</option>
+                <option>House Rent</option>
+                <option>Bills</option>
+                <option>Others</option>
+            </select>
+            <input
+  id="expenseDescription"
+  type="text"
+  class="form-control mb-2"
+  placeholder="Expense Description (e.g., Dinner with friends)"
+>
+
+
+            <select id="expenseBank" class="form-control mb-2"></select>
+
+            <input id="expenseDate" type="date" class="form-control mb-2">
+
+            <button class="btn btn-danger w-100" onclick="addExpense()">Add Expense</button>
+        </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <input type="month" id="monthFilter" class="form-control mb-2">
+            <input type="number" id="monthlyBudget" class="form-control mb-2" placeholder="Monthly Budget">
+            <button class="btn btn-warning mb-2" onclick="undoLastExpense()">Undo Last Expense</button>
+            <button class="btn btn-outline-success mb-2" onclick="exportToExcel()">Export to Excel</button>
+             <button class="btn btn-outline-primary mb-2" onclick="exportBankWiseExcel()">
+    Export Bank-wise Excel
+</button>
+
+            <!-- PIE CHART SIZE FIX -->
+            <div style="height:300px;">
+                <canvas id="expenseChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- BANK WISE CHARTS -->
+<div class="card mb-3">
+    <div class="card-body">
+        <h5>Bank-wise Expense Charts</h5>
+        <div id="bankCharts"></div>
+    </div>
+</div>
+
+
+    <!-- EXPENSE LIST -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5>Expenses</h5>
+            <ul id="expenseList" class="list-group"></ul>
+        </div>
+    </div>
+</div>
+ 
+
+<!-- EDIT EXPENSE MODAL -->
+<div class="modal fade" id="editExpenseModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Edit Expense</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editExpenseId">
+                <input type="hidden" id="editOldAmount">
+                <input type="hidden" id="editOldBankId">
+
+                <input id="editAmount" type="number" class="form-control mb-2">
+                <input id="editDate" type="date" class="form-control mb-2">
+
+                <select id="editCategory" class="form-control mb-2">
+                    <option>Food</option>
+                    <option>Grocery</option>
+                    <option>Transport</option>
+                    <option>Shopping</option>
+                    <option>Education</option>
+                    <option>Health</option>
+                    <option>House Rent</option>
+                    <option>Bills</option>
+                    <option>Others</option>
+                </select>
+
+                <select id="editBank" class="form-control"></select>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEditedExpense()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="js/dashboard.js"></script>
+
+</body>
+</html>
